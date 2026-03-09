@@ -3,278 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Carlos Bocigas Romay | Perfil Híbrido</title>
+    <title>Juan Carlos Bocigas | Estratega de Contenido Clínico e IA</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Chart.js para visualización de impacto -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Chosen Palette: Warm Neutrals & Deep Teal. Background: stone-50. Main text: stone-800. Accents: teal-600 (Tech/Clinical) and rose-600 (Creative). -->
-    <!-- Application Structure Plan: La web se organiza en un flujo narrativo que comienza con el "Impacto" (Hero), seguido por la "Tesis" del perfil híbrido (Psicología + IA + Diseño), una sección de Portafolio Visual adaptable, una sección de Vídeos con diseño de tarjetas modernas y finalmente la trayectoria detallada. Se ha elegido esta estructura para que el reclutador vea primero el valor de mercado antes que la lista de títulos. -->
+    <!-- Placeholder Comments Required -->
+    <!-- Chosen Palette: Soft Stone & Clinical Teal. Background: stone-50. Typography: stone-800. Accents: teal-600 (Trust/Clinical) and rose-500 (Attention/Viral). -->
+    <!-- Application Structure Plan: Una SPA de alto impacto diseñada como un "Business Case" de marca personal. Estructura: 1. Hero con métricas de éxito (Social Proof). 2. Sección "La Ciencia": Gráfico de Radar que muestra la hibridación (Psicología vs Tech). 3. "Estrategia de Retención": Gráfico interactivo que explica el modelo de 60s del informe. 4. Portafolio Visual: Grid para proyectos de diseño e imágenes. 5. Showreel: Sección de vídeos. 6. Timeline: Trayectoria profesional sintetizada. El flujo busca convencer al reclutador de que el usuario es una solución a un problema de ineficiencia de mercado. -->
     <!-- Visualization & Content Choices: 
-         1. Gráfico de Impacto (Chart.js) -> Objetivo: Informar -> Gráfico de Radar -> Justificación: Muestra el equilibrio perfecto entre las 3 áreas del perfil.
-         2. Grid de Proyectos -> Objetivo: Organizar -> Layout de tarjetas interactivas -> Justificación: Permite incluir imágenes y descripciones de forma limpia.
-         3. Sección de Vídeos -> Objetivo: Comparar/Explorar -> Galería horizontal -> Justificación: Destaca el éxito en YouTube y redes sociales.
-         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Se utilizan caracteres Unicode y CSS para iconografía. -->
+         1. Perfil Competencial -> Objetivo: Informar/Comparar -> Gráfico de Radar -> Justificación: Visualiza instantáneamente que el candidato no es solo un psicólogo o solo un editor, sino ambos.
+         2. Curva de Retención P(r) -> Objetivo: Demostrar expertise -> Gráfico de Línea Interactivo -> Justificación: Traduce un concepto abstracto del informe en una prueba de conocimiento técnico sobre la atención del usuario.
+         3. Grid de Proyectos -> Objetivo: Mostrar calidad -> Tarjetas con hover -> Justificación: Espacio limpio para las imágenes del usuario.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Iconografía mediante Unicode y CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
+            background-color: #fafaf9; /* stone-50 */
         }
 
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 500px;
-            margin: auto;
-            height: 400px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px border rgba(255, 255, 255, 0.3);
+        .glass-nav {
+            background: rgba(250, 250, 249, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(231, 229, 228, 0.5);
         }
 
-        .video-placeholder {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            aspect-ratio: 16/9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.75rem;
+        .stat-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
         }
 
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .gradient-text {
+            background: linear-gradient(135deg, #0d9488 0%, #e11d48 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #e7e5e4;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line::before {
+                left: 20px;
+            }
         }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-800">
+<body class="text-stone-800 antialiased overflow-x-hidden">
 
     <!-- Navegación -->
-    <nav class="fixed top-0 w-full z-50 glass-card border-b border-stone-200">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="font-extrabold text-xl tracking-tighter text-teal-700">JCB.ROMAY</div>
-            <div class="hidden md:flex space-x-8 text-sm font-semibold text-stone-500">
-                <a href="#inicio" class="hover:text-teal-600 transition">Inicio</a>
-                <a href="#hibrido" class="hover:text-teal-600 transition">Perfil Híbrido</a>
-                <a href="#proyectos" class="hover:text-teal-600 transition">Proyectos</a>
-                <a href="#videos" class="hover:text-teal-600 transition">Vídeos</a>
-                <a href="#contacto" class="bg-teal-600 text-white px-4 py-2 rounded-full hover:bg-teal-700 transition">Contacto</a>
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-black tracking-tighter text-teal-600">JCB</span>
+                <span class="text-stone-300">|</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-stone-500">Estratega Híbrido</span>
+            </div>
+            <div class="hidden lg:flex items-center space-x-10 text-sm font-bold text-stone-500">
+                <a href="#impacto" class="hover:text-teal-600 transition">Impacto</a>
+                <a href="#ciencia" class="hover:text-teal-600 transition">La Ciencia</a>
+                <a href="#portfolio" class="hover:text-teal-600 transition">Portafolio</a>
+                <a href="#trayectoria" class="hover:text-teal-600 transition">Trayectoria</a>
+                <a href="mailto:jcb.romay@gmail.com" class="bg-stone-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-600 transition shadow-lg shadow-stone-200">Contactar</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-teal-100 text-teal-700 text-xs font-bold uppercase tracking-widest">
-                    Psicólogo + Content Strategist + IA
+    <!-- Hero: Social Proof & Métricas -->
+    <section id="impacto" class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-7 space-y-8">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold">
+                    <span>&#128200;</span>
+                    <span>3M+ VISUALIZACIONES EN YOUTUBE</span>
                 </div>
-                <h1 class="text-5xl lg:text-7xl font-extrabold text-stone-900 leading-[1.1]">
-                    Rigor <span class="text-teal-600">Clínico</span>.<br>Viralidad <span class="text-rose-600">Ética</span>.
+                <h1 class="text-5xl lg:text-7xl font-extrabold text-stone-900 leading-[1.05] tracking-tight">
+                    Rigor <span class="text-teal-600">Clínico</span>. <br>
+                    Viralidad <span class="text-rose-500">Ética</span>.
                 </h1>
-                <p class="text-xl text-stone-600 leading-relaxed max-w-lg">
-                    Ayudo a startups de HealthTech y EdTech a transformar conocimientos complejos en activos visuales de alta retención sin comprometer la integridad científica.
+                <p class="text-xl text-stone-500 max-w-xl leading-relaxed">
+                    Psicólogo colegiado especializado en el diseño de contenido para <span class="text-stone-800 font-semibold underline decoration-teal-400">HealthTech y EdTech</span>. Elimino la brecha entre la precisión científica y la retención del usuario mediante IA y Motion Graphics.
                 </p>
-                <div class="flex space-x-4 pt-4">
-                    <div class="text-center">
-                        <span class="block text-3xl font-extrabold text-stone-900">+10M</span>
-                        <span class="text-xs text-stone-500 uppercase font-bold tracking-tighter">Views Totales</span>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="stat-card bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
+                        <span class="block text-3xl font-black text-stone-900">100K</span>
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Subs YouTube</span>
                     </div>
-                    <div class="w-px h-12 bg-stone-200"></div>
-                    <div class="text-center">
-                        <span class="block text-3xl font-extrabold text-stone-900">100K</span>
-                        <span class="text-xs text-stone-500 uppercase font-bold tracking-tighter">Suscriptores</span>
+                    <div class="stat-card bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
+                        <span class="block text-3xl font-black text-stone-900">+10a</span>
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Exp. Clínica</span>
                     </div>
-                    <div class="w-px h-12 bg-stone-200"></div>
-                    <div class="text-center">
-                        <span class="block text-3xl font-extrabold text-stone-900">+10a</span>
-                        <span class="text-xs text-stone-500 uppercase font-bold tracking-tighter">Exp. Psicología</span>
+                    <div class="stat-card bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
+                        <span class="block text-3xl font-black text-stone-900">40%</span>
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Eficiencia IA</span>
+                    </div>
+                    <div class="stat-card bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
+                        <span class="block text-3xl font-black text-stone-900">60s</span>
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Retención Alta</span>
                     </div>
                 </div>
-            </div>
-            <div class="bg-white p-8 rounded-3xl shadow-xl border border-stone-100">
-                <h3 class="text-center font-bold text-stone-400 uppercase text-xs tracking-widest mb-6">Matriz de Competencias Híbridas</h3>
-                <div class="chart-container">
-                    <canvas id="skillsChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- El Concepto Híbrido -->
-    <section id="hibrido" class="py-24 bg-stone-900 text-white px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="max-w-3xl mb-16">
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-6">El "Human in the Loop" que tu empresa necesita</h2>
-                <p class="text-stone-400 text-lg">
-                    Mi labor consiste en ser el puente entre el departamento clínico y el creativo, optimizando la producción mediante IA para alcanzar resultados antes reservados a grandes presupuestos.
-                </p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl bg-stone-800 border border-stone-700 hover:border-teal-500 transition">
-                    <div class="text-4xl mb-4">&#129504;</div>
-                    <h4 class="text-xl font-bold mb-3">Psicología de la Atención</h4>
-                    <p class="text-stone-400 text-sm">Aplicación de carga cognitiva y dopamina para maximizar el <i>completion rate</i> en contenidos de salud y educación.</p>
-                </div>
-                <div class="p-8 rounded-2xl bg-stone-800 border border-stone-700 hover:border-rose-500 transition">
-                    <div class="text-4xl mb-4">&#127916;</div>
-                    <h4 class="text-xl font-bold mb-3">Motion Graphics Pro</h4>
-                    <p class="text-stone-400 text-sm">Producción autónoma en After Effects y Premiere para reducir tiempos de entrega y costes de traducción creativa.</p>
-                </div>
-                <div class="p-8 rounded-2xl bg-stone-800 border border-stone-700 hover:border-teal-400 transition">
-                    <div class="text-4xl mb-4">&#129302;</div>
-                    <h4 class="text-xl font-bold mb-3">Optimización con IA</h4>
-                    <p class="text-stone-400 text-sm">Escalado de producción global mediante LLMs y herramientas generativas para competir en mercados internacionales.</p>
+            <div class="lg:col-span-5 bg-white p-10 rounded-[3rem] shadow-2xl border border-stone-50 relative">
+                <div class="absolute -top-4 -right-4 w-24 h-24 bg-teal-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-center font-bold text-stone-400 uppercase text-[10px] tracking-[0.2em] mb-8">Matriz Competencial Híbrida</h3>
+                <div class="chart-container">
+                    <canvas id="competencyChart"></canvas>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Proyectos / Portfolio -->
-    <section id="proyectos" class="py-24 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                <div>
-                    <h2 class="text-3xl font-extrabold text-stone-900 mb-2">Proyectos Destacados</h2>
-                    <p class="text-stone-500">Una muestra de mi capacidad de diseño visual y conceptual.</p>
-                </div>
-                <div class="flex space-x-2">
-                    <span class="px-4 py-2 rounded-full bg-stone-200 text-stone-600 text-sm font-semibold">Todos</span>
-                    <span class="px-4 py-2 rounded-full bg-white border border-stone-200 text-stone-400 text-sm font-semibold">UX/UI</span>
-                    <span class="px-4 py-2 rounded-full bg-white border border-stone-200 text-stone-400 text-sm font-semibold">Branding</span>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="group hover-lift">
-                    <div class="bg-stone-200 rounded-2xl aspect-[4/3] mb-4 overflow-hidden flex items-center justify-center text-stone-400 relative">
-                        [Imagen de Diseño de App]
-                        <div class="absolute inset-0 bg-teal-600 opacity-0 group-hover:opacity-10 transition duration-300"></div>
-                    </div>
-                    <h4 class="font-bold text-lg text-stone-900">Interfaz Educativa IA</h4>
-                    <p class="text-sm text-stone-500">Diseño de interfaz para tutoría asistida por IA.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="group hover-lift">
-                    <div class="bg-stone-200 rounded-2xl aspect-[4/3] mb-4 overflow-hidden flex items-center justify-center text-stone-400 relative">
-                        [Imagen de Branding Médico]
-                        <div class="absolute inset-0 bg-rose-600 opacity-0 group-hover:opacity-10 transition duration-300"></div>
-                    </div>
-                    <h4 class="font-bold text-lg text-stone-900">Identidad HealthTech</h4>
-                    <p class="text-sm text-stone-500">Creación de marca para startup de salud mental.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="group hover-lift">
-                    <div class="bg-stone-200 rounded-2xl aspect-[4/3] mb-4 overflow-hidden flex items-center justify-center text-stone-400 relative">
-                        [Imagen de Motion Graphics]
-                        <div class="absolute inset-0 bg-stone-900 opacity-0 group-hover:opacity-10 transition duration-300"></div>
-                    </div>
-                    <h4 class="font-bold text-lg text-stone-900">Cápsula de Micro-learning</h4>
-                    <p class="text-sm text-stone-500">Animación infográfica sobre neurobiología.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Galería de Vídeos -->
-    <section id="videos" class="py-24 bg-white border-y border-stone-200 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold text-stone-900 mb-4">Producción Audiovisual & Storytelling</h2>
-                <p class="text-stone-500 max-w-xl mx-auto">Vídeos diseñados para retener y educar, acumulando millones de impactos en plataformas globales.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="space-y-4">
-                    <div class="video-placeholder group relative cursor-pointer">
-                        <div class="text-white text-5xl opacity-80 group-hover:scale-110 transition">&#9654;</div>
-                        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                            <span class="bg-rose-600 text-white text-[10px] font-bold px-2 py-1 rounded">YOUTUBE</span>
-                            <span class="text-white text-xs font-bold text-shadow">3.2M Views</span>
+    <!-- Sección: La Ciencia de la Retención -->
+    <section id="ciencia" class="py-32 bg-stone-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="space-y-8">
+                    <h2 class="text-4xl font-extrabold tracking-tight">Arquitectura de la Atención <span class="text-teal-400">EdTech</span></h2>
+                    <p class="text-stone-400 text-lg leading-relaxed">
+                        No se trata de "vender", sino de conectar mediante el aprendizaje significativo. Aplico principios neuropsicológicos para estructurar guiones que maximizan el <span class="text-white font-bold italic">Completion Rate</span>.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4 group cursor-pointer" onclick="highlightStep(0)">
+                            <div class="w-10 h-10 rounded-xl bg-stone-800 flex items-center justify-center font-bold text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition">01</div>
+                            <div>
+                                <h4 class="font-bold text-white">Interrupción del Patrón (0-3s)</h4>
+                                <p class="text-sm text-stone-500">Visuales impactantes en After Effects para evitar el "scroll".</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 group cursor-pointer" onclick="highlightStep(1)">
+                            <div class="w-10 h-10 rounded-xl bg-stone-800 flex items-center justify-center font-bold text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition">02</div>
+                            <div>
+                                <h4 class="font-bold text-white">Validación Empática & Rigor</h4>
+                                <p class="text-sm text-stone-500">Establecimiento de la autoridad clínica mediante evidencia.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 group cursor-pointer" onclick="highlightStep(2)">
+                            <div class="w-10 h-10 rounded-xl bg-stone-800 flex items-center justify-center font-bold text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition">03</div>
+                            <div>
+                                <h4 class="font-bold text-white">Carga de Valor Dinámica</h4>
+                                <p class="text-sm text-stone-500">Infografías animadas que reducen el esfuerzo de procesamiento.</p>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-xl">Divulgación de Psicología Clínica</h4>
-                        <p class="text-stone-500 text-sm">Explicación de trastornos mediante narrativa dinámica y edición de ritmo rápido.</p>
-                    </div>
                 </div>
-                <div class="space-y-4">
-                    <div class="video-placeholder group relative cursor-pointer">
-                        <div class="text-white text-5xl opacity-80 group-hover:scale-110 transition">&#9654;</div>
-                        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                            <span class="bg-teal-600 text-white text-[10px] font-bold px-2 py-1 rounded">REELS / TIKTOK</span>
-                            <span class="text-white text-xs font-bold text-shadow">Alta Retención</span>
-                        </div>
+                <div class="relative bg-stone-800 p-8 rounded-[2rem] border border-stone-700">
+                    <div class="chart-container w-full h-80">
+                        <canvas id="retentionChart"></canvas>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-xl">Micro-learning en Redes</h4>
-                        <p class="text-stone-500 text-sm">Píldoras formativas de 60 segundos diseñadas para captar el interés en los primeros 2.5s.</p>
+                    <div class="mt-6 text-center">
+                        <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Probabilidad de Retención P(r) vs Tiempo</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contacto / Footer -->
-    <footer id="contacto" class="py-24 px-6 bg-stone-50">
-        <div class="max-w-6xl mx-auto text-center space-y-8">
-            <h2 class="text-4xl font-extrabold text-stone-900">¿Hablamos del futuro de tu contenido?</h2>
-            <p class="text-stone-600 max-w-lg mx-auto italic">
-                "No solo hago vídeos bonitos; hago vídeos que la gente termina de ver."
+    <!-- Sección: Portafolio de Proyectos -->
+    <section id="portfolio" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="space-y-4">
+                <h2 class="text-4xl font-extrabold text-stone-900 tracking-tight">Proyectos & <span class="text-teal-600">Assets</span></h2>
+                <p class="text-stone-500 max-w-md italic text-lg">"Prototipos de alta fidelidad que demuestran el dominio de la herramienta y la psicología visual."</p>
+            </div>
+            <div class="flex space-x-3">
+                <button class="px-6 py-2 rounded-full bg-stone-900 text-white text-xs font-bold">Todos</button>
+                <button class="px-6 py-2 rounded-full bg-white border border-stone-200 text-stone-400 text-xs font-bold hover:border-teal-400 hover:text-teal-600 transition">IA Workflows</button>
+                <button class="px-6 py-2 rounded-full bg-white border border-stone-200 text-stone-400 text-xs font-bold hover:border-rose-400 hover:text-rose-600 transition">Branding</button>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Proyecto 1 -->
+            <div class="group cursor-pointer">
+                <div class="bg-stone-200 rounded-[2rem] aspect-video mb-6 overflow-hidden relative border border-stone-100 shadow-sm flex items-center justify-center text-stone-400 font-bold uppercase text-[10px] tracking-widest">
+                                        <div class="absolute inset-0 bg-teal-600/0 group-hover:bg-teal-600/10 transition duration-500"></div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-stone-800">UX/UI: Tutoría IA</h4>
+                        <p class="text-sm text-stone-500">Diseño de interfaz pedagógica interactiva.</p>
+                    </div>
+                    <span class="text-teal-600 font-black text-xl">&#8594;</span>
+                </div>
+            </div>
+            <!-- Proyecto 2 -->
+            <div class="group cursor-pointer">
+                <div class="bg-stone-200 rounded-[2rem] aspect-video mb-6 overflow-hidden relative border border-stone-100 shadow-sm flex items-center justify-center text-stone-400 font-bold uppercase text-[10px] tracking-widest">
+                                        <div class="absolute inset-0 bg-rose-500/0 group-hover:bg-rose-500/10 transition duration-500"></div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-stone-800">Identidad: MenteSana</h4>
+                        <p class="text-sm text-stone-500">Branding para plataforma de bienestar emocional.</p>
+                    </div>
+                    <span class="text-rose-500 font-black text-xl">&#8594;</span>
+                </div>
+            </div>
+            <!-- Proyecto 3 -->
+            <div class="group cursor-pointer">
+                <div class="bg-stone-200 rounded-[2rem] aspect-video mb-6 overflow-hidden relative border border-stone-100 shadow-sm flex items-center justify-center text-stone-400 font-bold uppercase text-[10px] tracking-widest">
+                                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition duration-500"></div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-stone-800">Motion: El Eje HPA</h4>
+                        <p class="text-sm text-stone-500">Animación 2D/3D sobre estrés y ansiedad.</p>
+                    </div>
+                    <span class="text-stone-900 font-black text-xl">&#8594;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trayectoria: Timeline Vertical -->
+    <section id="trayectoria" class="py-32 bg-stone-50 px-6">
+        <div class="max-w-4xl mx-auto text-center mb-24">
+            <h2 class="text-4xl font-extrabold text-stone-900 tracking-tight mb-4">Trayectoria Híbrida</h2>
+            <p class="text-stone-500">De la psicología clínica a la frontera tecnológica.</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative timeline-line">
+            <!-- 2026 -->
+            <div class="flex flex-col md:flex-row items-center mb-24 relative z-10">
+                <div class="flex-1 md:text-right md:pr-12 mb-4 md:mb-0">
+                    <span class="text-4xl font-black text-teal-600/20">2026</span>
+                    <h4 class="text-xl font-extrabold text-stone-800">Diseño Gráfico & Motion Graphics</h4>
+                    <p class="text-sm text-stone-500">Lightbox Academy. Especialización en After Effects y Cinema 4D para contenido de alto impacto.</p>
+                </div>
+                <div class="w-4 h-4 rounded-full bg-teal-600 border-4 border-white shadow-lg"></div>
+                <div class="flex-1 md:pl-12"></div>
+            </div>
+
+            <!-- 2021 -->
+            <div class="flex flex-col md:flex-row items-center mb-24 relative z-10">
+                <div class="flex-1"></div>
+                <div class="w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow-lg"></div>
+                <div class="flex-1 md:pl-12 mt-4 md:mt-0">
+                    <span class="text-4xl font-black text-rose-500/20">2021</span>
+                    <h4 class="text-xl font-extrabold text-stone-800">Fundador de Canal de Divulgación</h4>
+                    <p class="text-sm text-stone-500">Gestión de comunidad (+100k subs). Diseño de estrategias algorítmicas y storytelling psicológico.</p>
+                </div>
+            </div>
+
+            <!-- 2013 -->
+            <div class="flex flex-col md:flex-row items-center mb-24 relative z-10">
+                <div class="flex-1 md:text-right md:pr-12 mb-4 md:mb-0">
+                    <span class="text-4xl font-black text-stone-400/20">2013</span>
+                    <h4 class="text-xl font-extrabold text-stone-800">Psicología (UCM) & PNL</h4>
+                    <p class="text-sm text-stone-500">Graduado en la Complutense con especialidad en Neuropsicología. Máster en Programación Neurolingüística.</p>
+                </div>
+                <div class="w-4 h-4 rounded-full bg-stone-400 border-4 border-white shadow-lg"></div>
+                <div class="flex-1 md:pl-12"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: Contacto & CTA -->
+    <footer class="py-24 px-6 bg-white border-t border-stone-100 text-center">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <h2 class="text-5xl font-extrabold tracking-tighter text-stone-900 leading-none">¿Listo para escalar tu <br><span class="gradient-text">visibilidad clínica</span>?</h2>
+            <p class="text-stone-500 text-xl leading-relaxed max-w-xl mx-auto italic">
+                "Elimino la fricción entre el rigor y el clic. Hablemos sobre cómo optimizar tu flujo de contenido con IA."
             </p>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
-                <a href="mailto:jcb.romay@gmail.com" class="w-full md:w-auto bg-stone-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-stone-800 transition">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="mailto:jcb.romay@gmail.com" class="w-full sm:w-auto px-10 py-5 bg-stone-900 text-white rounded-[1.5rem] font-bold text-lg hover:bg-teal-600 transition-all shadow-xl shadow-stone-200">
                     Email: jcb.romay@gmail.com
                 </a>
-                <a href="https://www.linkedin.com/in/juan-carlos-bocigass-romay-68a1061b8" target="_blank" class="w-full md:w-auto bg-white border border-stone-200 text-stone-900 px-8 py-4 rounded-2xl font-bold hover:bg-stone-50 transition">
-                    LinkedIn Perfil
+                <a href="https://www.linkedin.com/in/juan-carlos-bocigass-romay-68a1061b8" target="_blank" class="w-full sm:w-auto px-10 py-5 bg-white border-2 border-stone-900 text-stone-900 rounded-[1.5rem] font-bold text-lg hover:bg-stone-50 transition-all">
+                    LinkedIn
                 </a>
             </div>
-            <div class="pt-20 text-stone-400 text-xs font-medium uppercase tracking-widest">
-                &copy; 2026 Juan Carlos Bocigas Romay | Diseñado para el éxito híbrido
+            <div class="pt-24 border-t border-stone-50 text-stone-300 text-[10px] font-bold uppercase tracking-[0.3em]">
+                &copy; 2026 Juan Carlos Bocigas Romay | Diseñado con IA para el sector HealthTech
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript Logic -->
     <script>
-        // Inicialización de Gráfico de Radar para competencias
-        const ctx = document.getElementById('skillsChart').getContext('2d');
-        new Chart(ctx, {
+        // --- 1. Radar Chart: Matriz Competencial ---
+        const compCtx = document.getElementById('competencyChart').getContext('2d');
+        new Chart(compCtx, {
             type: 'radar',
             data: {
-                labels: [
-                    'Psicología Clínica', 
-                    'Motion Graphics', 
-                    'IA Generativa', 
-                    'Storytelling', 
-                    'Growth Marketing', 
-                    'Diseño UX/UI'
-                ],
+                labels: ['Psicología Clínica', 'Motion Graphics', 'IA Generativa', 'Storytelling', 'Analítica RRSS', 'UX/UI'],
                 datasets: [{
-                    label: 'Nivel de Dominio',
+                    label: 'Dominio Híbrido',
                     data: [95, 88, 92, 90, 85, 80],
-                    fill: true,
                     backgroundColor: 'rgba(13, 148, 136, 0.2)',
                     borderColor: 'rgb(13, 148, 136)',
+                    borderWidth: 2,
                     pointBackgroundColor: 'rgb(13, 148, 136)',
                     pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(13, 148, 136)'
+                    pointHoverRadius: 5
                 }]
             },
             options: {
@@ -282,20 +332,81 @@
                 maintainAspectRatio: false,
                 scales: {
                     r: {
-                        angleLines: { color: '#e7e5e4' },
-                        grid: { color: '#e7e5e4' },
+                        angleLines: { color: '#f5f5f4' },
+                        grid: { color: '#f5f5f4' },
+                        ticks: { display: false, max: 100 },
                         pointLabels: {
-                            font: { size: 10, weight: 'bold' },
+                            font: { size: 9, weight: '800', family: 'Plus Jakarta Sans' },
                             color: '#78716c'
-                        },
-                        ticks: { display: false, max: 100 }
+                        }
                     }
                 },
-                plugins: {
-                    legend: { display: false }
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // --- 2. Line Chart: Curva de Retención ---
+        const retCtx = document.getElementById('retentionChart').getContext('2d');
+        let retentionChartObj = new Chart(retCtx, {
+            type: 'line',
+            data: {
+                labels: ['0s', '3s', '15s', '30s', '45s', '60s'],
+                datasets: [{
+                    label: 'P(r) Modelo Alta Retención',
+                    data: [100, 95, 88, 82, 78, 75],
+                    borderColor: '#2dd4bf',
+                    borderWidth: 4,
+                    fill: true,
+                    backgroundColor: 'rgba(45, 212, 191, 0.1)',
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#2dd4bf',
+                    pointBorderColor: '#fff'
+                }, {
+                    label: 'Promedio Sector',
+                    data: [100, 50, 25, 15, 10, 5],
+                    borderColor: '#44403c',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: false 
+                    },
+                    tooltip: {
+                        backgroundColor: '#1c1917',
+                        titleFont: { size: 10 },
+                        bodyFont: { size: 10 }
+                    }
+                },
+                scales: {
+                    y: { 
+                        display: false, 
+                        max: 100 
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: { color: '#78716c', font: { size: 9, weight: 'bold' } }
+                    }
                 }
             }
         });
+
+        // Interacción para resaltar puntos en la gráfica
+        function highlightStep(step) {
+            const points = [1, 2, 4]; // Índices aproximados
+            retentionChartObj.setActiveElements([{
+                datasetIndex: 0,
+                index: points[step]
+            }]);
+            retentionChartObj.update();
+        }
     </script>
 </body>
 </html>
