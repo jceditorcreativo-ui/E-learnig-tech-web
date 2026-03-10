@@ -74,6 +74,12 @@
                 left: 20px;
             }
         }
+
+        /* Estilo para los placeholders de imagen */
+        .img-placeholder {
+            background: linear-gradient(45deg, #e7e5e4 25%, #f5f5f4 25%, #f5f5f4 50%, #e7e5e4 50%, #e7e5e4 75%, #f5f5f4 75%, #f5f5f4 100%);
+            background-size: 20px 20px;
+        }
     </style>
 </head>
 <body class="text-stone-800 antialiased overflow-x-hidden">
@@ -91,6 +97,7 @@
                 <a href="#ciencia" class="hover:text-teal-600 transition">La Ciencia</a>
                 <a href="#portfolio" class="hover:text-teal-600 transition">Portafolio</a>
                 <a href="#trayectoria" class="hover:text-teal-600 transition">Trayectoria</a>
+                <!-- ACTUALIZAR: Cambia este mail por el tuyo -->
                 <a href="mailto:jcb.romay@gmail.com" class="bg-stone-900 text-white px-6 py-2.5 rounded-full hover:bg-teal-600 transition shadow-lg shadow-stone-200">Contactar</a>
             </div>
         </div>
@@ -113,6 +120,7 @@
                 </p>
                 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <!-- ACTUALIZAR: Puedes cambiar estas cifras según tus métricas reales -->
                     <div class="stat-card bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
                         <span class="block text-3xl font-black text-stone-900">100K</span>
                         <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Subs YouTube</span>
@@ -135,6 +143,7 @@
             <div class="lg:col-span-5 bg-white p-10 rounded-[3rem] shadow-2xl border border-stone-50 relative">
                 <div class="absolute -top-4 -right-4 w-24 h-24 bg-teal-500/10 rounded-full blur-3xl"></div>
                 <h3 class="text-center font-bold text-stone-400 uppercase text-[10px] tracking-[0.2em] mb-8">Matriz Competencial Híbrida</h3>
+                <!-- GRÁFICO: Se configura en la sección <script> al final del archivo -->
                 <div class="chart-container">
                     <canvas id="competencyChart"></canvas>
                 </div>
@@ -176,6 +185,7 @@
                     </div>
                 </div>
                 <div class="relative bg-stone-800 p-8 rounded-[2rem] border border-stone-700">
+                    <!-- GRÁFICO DE LÍNEA: Configurado en el script -->
                     <div class="chart-container w-full h-80">
                         <canvas id="retentionChart"></canvas>
                     </div>
@@ -202,10 +212,13 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <!-- Proyecto 1 -->
+            <!-- Proyecto 1: ACTUALIZAR - Sustituye el <img> por tu captura real -->
             <div class="group cursor-pointer">
                 <div class="bg-stone-200 rounded-[2rem] aspect-video mb-6 overflow-hidden relative border border-stone-100 shadow-sm flex items-center justify-center text-stone-400 font-bold uppercase text-[10px] tracking-widest">
-                                        <div class="absolute inset-0 bg-teal-600/0 group-hover:bg-teal-600/10 transition duration-500"></div>
+                    <!-- INSTRUCCIÓN: Cambia 'src' por tu imagen subida a GitHub -->
+                    <img src="tu_imagen_app.jpg" class="w-full h-full object-cover hidden" onload="this.classList.remove('hidden')">
+                    
+                    <div class="absolute inset-0 bg-teal-600/0 group-hover:bg-teal-600/10 transition duration-500"></div>
                 </div>
                 <div class="flex justify-between items-start">
                     <div>
@@ -215,10 +228,13 @@
                     <span class="text-teal-600 font-black text-xl">&#8594;</span>
                 </div>
             </div>
-            <!-- Proyecto 2 -->
+
+            <!-- Proyecto 2: ACTUALIZAR - Sustituye el <img> por tu captura real -->
             <div class="group cursor-pointer">
                 <div class="bg-stone-200 rounded-[2rem] aspect-video mb-6 overflow-hidden relative border border-stone-100 shadow-sm flex items-center justify-center text-stone-400 font-bold uppercase text-[10px] tracking-widest">
-                                        <div class="absolute inset-0 bg-rose-500/0 group-hover:bg-rose-500/10 transition duration-500"></div>
+                    <img src="tu_branding.jpg" class="w-full h-full object-cover hidden" onload="this.classList.remove('hidden')">
+                    
+                    <div class="absolute inset-0 bg-rose-500/0 group-hover:bg-rose-500/10 transition duration-500"></div>
                 </div>
                 <div class="flex justify-between items-start">
                     <div>
@@ -228,10 +244,13 @@
                     <span class="text-rose-500 font-black text-xl">&#8594;</span>
                 </div>
             </div>
-            <!-- Proyecto 3 -->
+
+            <!-- Proyecto 3: ACTUALIZAR - Sustituye el <img> por tu captura real -->
             <div class="group cursor-pointer">
                 <div class="bg-stone-200 rounded-[2rem] aspect-video mb-6 overflow-hidden relative border border-stone-100 shadow-sm flex items-center justify-center text-stone-400 font-bold uppercase text-[10px] tracking-widest">
-                                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition duration-500"></div>
+                    <img src="tu_motion.jpg" class="w-full h-full object-cover hidden" onload="this.classList.remove('hidden')">
+                    
+                    <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition duration-500"></div>
                 </div>
                 <div class="flex justify-between items-start">
                     <div>
@@ -295,9 +314,11 @@
                 "Elimino la fricción entre el rigor y el clic. Hablemos sobre cómo optimizar tu flujo de contenido con IA."
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <!-- ACTUALIZAR: Tu mail real -->
                 <a href="mailto:jcb.romay@gmail.com" class="w-full sm:w-auto px-10 py-5 bg-stone-900 text-white rounded-[1.5rem] font-bold text-lg hover:bg-teal-600 transition-all shadow-xl shadow-stone-200">
                     Email: jcb.romay@gmail.com
                 </a>
+                <!-- ACTUALIZAR: Tu perfil de LinkedIn real -->
                 <a href="https://www.linkedin.com/in/juan-carlos-bocigass-romay-68a1061b8" target="_blank" class="w-full sm:w-auto px-10 py-5 bg-white border-2 border-stone-900 text-stone-900 rounded-[1.5rem] font-bold text-lg hover:bg-stone-50 transition-all">
                     LinkedIn
                 </a>
@@ -308,9 +329,10 @@
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Logic: CONFIGURACIÓN DE GRÁFICOS -->
     <script>
         // --- 1. Radar Chart: Matriz Competencial ---
+        // INSTRUCCIÓN: Cambia los números en 'data' (del 0 al 100) para ajustar tu perfil real
         const compCtx = document.getElementById('competencyChart').getContext('2d');
         new Chart(compCtx, {
             type: 'radar',
@@ -318,7 +340,7 @@
                 labels: ['Psicología Clínica', 'Motion Graphics', 'IA Generativa', 'Storytelling', 'Analítica RRSS', 'UX/UI'],
                 datasets: [{
                     label: 'Dominio Híbrido',
-                    data: [95, 88, 92, 90, 85, 80],
+                    data: [95, 88, 92, 90, 85, 80], // Ajusta estos valores
                     backgroundColor: 'rgba(13, 148, 136, 0.2)',
                     borderColor: 'rgb(13, 148, 136)',
                     borderWidth: 2,
@@ -352,8 +374,8 @@
             data: {
                 labels: ['0s', '3s', '15s', '30s', '45s', '60s'],
                 datasets: [{
-                    label: 'P(r) Modelo Alta Retención',
-                    data: [100, 95, 88, 82, 78, 75],
+                    label: 'Tu Estrategia de Retención',
+                    data: [100, 95, 88, 82, 78, 75], // Curva de alta retención
                     borderColor: '#2dd4bf',
                     borderWidth: 4,
                     fill: true,
@@ -363,8 +385,8 @@
                     pointBackgroundColor: '#2dd4bf',
                     pointBorderColor: '#fff'
                 }, {
-                    label: 'Promedio Sector',
-                    data: [100, 50, 25, 15, 10, 5],
+                    label: 'Promedio Sector (Caída)',
+                    data: [100, 50, 25, 15, 10, 5], // Lo que les pasa a los que no saben psicología
                     borderColor: '#44403c',
                     borderWidth: 2,
                     borderDash: [5, 5],
@@ -398,9 +420,9 @@
             }
         });
 
-        // Interacción para resaltar puntos en la gráfica
+        // Interacción para resaltar puntos en la gráfica al hacer clic en los pasos
         function highlightStep(step) {
-            const points = [1, 2, 4]; // Índices aproximados
+            const points = [1, 2, 4]; // Puntos correspondientes a 3s, 15s y 45s
             retentionChartObj.setActiveElements([{
                 datasetIndex: 0,
                 index: points[step]
