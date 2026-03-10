@@ -10,13 +10,9 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Application Structure Plan: SPA interactiva con fondo de simulación de fluidos (SplashCursor) integrado mediante WebGL puro. Se han mapeado los parámetros de React a la implementación de Vanilla JS para asegurar compatibilidad total en un único archivo. -->
     <!-- Chosen Palette: Stone & Deep Teal. Background: stone-50. Typography: stone-800. Accents: teal-600. -->
-    <!-- Application Structure Plan: SPA interactiva con fondo de simulación de fluidos (SplashCursor) integrado mediante WebGL. La estructura se mantiene profesional (Hero, Gráficos de Datos, Portfolio) pero con una capa visual reactiva que refuerza la faceta de "Artes Digitales" del usuario. -->
-    <!-- Visualization & Content Choices: 
-         1. Fondo SplashCursor -> Objetivo: Impacto/Engagement -> Canvas WebGL -> Justificación: Sustituye el fondo estático por uno que demuestra dominio de Motion Graphics en tiempo real.
-         2. Gráfico Competencial -> Objetivo: Comparar -> Radar Chart -> Justificación: Muestra el perfil híbrido.
-         3. Curva de Retención -> Objetivo: Demostrar autoridad -> Line Chart -> Justificación: Explica el valor del rigor clínico en el contenido.
-         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -28,14 +24,20 @@
             overflow-x: hidden;
         }
 
-        #fluid-canvas {
+        /* Contenedor del SplashCursor */
+        #fluid-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1; /* Detrás de todo el contenido */
-            pointer-events: none; /* Permite clickear los botones debajo */
+            z-index: -1;
+            pointer-events: auto; /* Permite la interacción con el fluido */
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
         }
 
         .glass-nav {
@@ -45,13 +47,15 @@
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
             transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.5);
         }
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             background: rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
         .chart-container {
@@ -63,13 +67,21 @@
         section {
             position: relative;
             z-index: 10;
+            pointer-events: none; /* Deja pasar los eventos al canvas de fondo */
+        }
+
+        /* Reactiva los eventos para elementos interactivos */
+        section *, nav * {
+            pointer-events: auto;
         }
     </style>
 </head>
 <body class="text-stone-800 antialiased">
 
-    <!-- Canvas para el efecto SplashCursor -->
-    <canvas id="fluid-canvas"></canvas>
+    <!-- Implementación del SplashCursor (WebGL Fluid) -->
+    <div id="fluid-wrapper">
+        <canvas></canvas>
+    </div>
 
     <!-- Navegación -->
     <nav class="fixed top-0 w-full z-50 glass-nav">
@@ -99,18 +111,18 @@
                     Transformo datos científicos en experiencias visuales de alta retención. Especialista en HealthTech y EdTech.
                 </p>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="stat-card p-6 rounded-2xl border border-stone-100 shadow-sm text-center">
+                    <div class="stat-card p-6 rounded-3xl text-center">
                         <span class="block text-2xl font-black">+10M</span>
                         <span class="text-[10px] text-stone-400 font-bold uppercase">Views</span>
                     </div>
-                    <div class="stat-card p-6 rounded-2xl border border-stone-100 shadow-sm text-center">
+                    <div class="stat-card p-6 rounded-3xl text-center">
                         <span class="block text-2xl font-black">100K</span>
                         <span class="text-[10px] text-stone-400 font-bold uppercase">Subs</span>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white/80 backdrop-blur p-8 rounded-[2.5rem] shadow-xl border border-white">
+            <div class="bg-white/90 backdrop-blur p-8 rounded-[2.5rem] shadow-xl border border-white">
                 <h3 class="text-center font-bold text-stone-400 uppercase text-[10px] tracking-widest mb-6">Perfil Competencial</h3>
                 <div class="chart-container">
                     <canvas id="competencyChart"></canvas>
@@ -119,35 +131,35 @@
         </div>
     </section>
 
-    <!-- Sección de Proyectos (Placeholders para tus imágenes) -->
+    <!-- Proyectos -->
     <section id="proyectos" class="py-24 px-6 max-w-7xl mx-auto">
-        <h2 class="text-3xl font-extrabold mb-12">Proyectos Destacados</h2>
+        <h2 class="text-3xl font-extrabold mb-12 text-stone-900">Proyectos Destacados</h2>
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="group cursor-pointer">
-                <div class="bg-stone-200 rounded-3xl aspect-video mb-4 overflow-hidden flex items-center justify-center text-stone-400 font-bold text-[10px] tracking-widest uppercase">
+            <div class="group stat-card p-4 rounded-3xl cursor-pointer">
+                <div class="bg-stone-200 rounded-2xl aspect-video mb-4 overflow-hidden flex items-center justify-center text-stone-400 font-bold text-[10px] tracking-widest uppercase">
                     [Imagen: Branding Health]
                 </div>
-                <h4 class="font-bold">MenteSana Branding</h4>
-                <p class="text-xs text-stone-500 italic">Identidad para Salud Mental</p>
+                <h4 class="font-bold px-2">MenteSana Branding</h4>
+                <p class="text-xs text-stone-500 italic px-2">Identidad para Salud Mental</p>
             </div>
-            <div class="group cursor-pointer">
-                <div class="bg-stone-200 rounded-3xl aspect-video mb-4 overflow-hidden flex items-center justify-center text-stone-400 font-bold text-[10px] tracking-widest uppercase">
+            <div class="group stat-card p-4 rounded-3xl cursor-pointer">
+                <div class="bg-stone-200 rounded-2xl aspect-video mb-4 overflow-hidden flex items-center justify-center text-stone-400 font-bold text-[10px] tracking-widest uppercase">
                     [Imagen: UX/UI IA]
                 </div>
-                <h4 class="font-bold">IA Tutor Dashboard</h4>
-                <p class="text-xs text-stone-500 italic">Diseño de Interfaz EdTech</p>
+                <h4 class="font-bold px-2">IA Tutor Dashboard</h4>
+                <p class="text-xs text-stone-500 italic px-2">Diseño de Interfaz EdTech</p>
             </div>
-            <div class="group cursor-pointer">
-                <div class="bg-stone-200 rounded-3xl aspect-video mb-4 overflow-hidden flex items-center justify-center text-stone-400 font-bold text-[10px] tracking-widest uppercase">
+            <div class="group stat-card p-4 rounded-3xl cursor-pointer">
+                <div class="bg-stone-200 rounded-2xl aspect-video mb-4 overflow-hidden flex items-center justify-center text-stone-400 font-bold text-[10px] tracking-widest uppercase">
                     [Imagen: Motion Graphic]
                 </div>
-                <h4 class="font-bold">Neurobiología en 60s</h4>
-                <p class="text-xs text-stone-500 italic">Motion Graphics para Reels</p>
+                <h4 class="font-bold px-2">Neurobiología en 60s</h4>
+                <p class="text-xs text-stone-500 italic px-2">Motion Graphics para Reels</p>
             </div>
         </div>
     </section>
 
-    <!-- Scripts: Gráficos y Simulación de Fluidos -->
+    <!-- Scripts: Gráficos y SplashCursor Engine -->
     <script>
         // --- 1. CONFIGURACIÓN DEL RADAR CHART ---
         const ctx = document.getElementById('competencyChart').getContext('2d');
@@ -171,14 +183,13 @@
             }
         });
 
-        // --- 2. SIMULACIÓN DE FLUIDOS (SPLASH CURSOR ADAPTADO) ---
-        // Basado en la implementación de WebGL para el efecto de cursor
+        // --- 2. ENGINE DEL SPLASH CURSOR (WebGL Fluid Simulation) ---
+        // Implementación directa con tus parámetros
         (function() {
-            const canvas = document.getElementById('fluid-canvas');
-            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            const canvas = document.querySelector('#fluid-wrapper canvas');
             
-            // Parámetros basados en tu solicitud
-            const config = {
+            // TUS PARÁMETROS DE REACT MAPEADOS
+            const params = {
                 SIM_RESOLUTION: 128,
                 DYE_RESOLUTION: 768,
                 DENSITY_DISSIPATION: 3.5,
@@ -187,33 +198,42 @@
                 CURL: 3,
                 SPLAT_RADIUS: 0.1,
                 SPLAT_FORCE: 4000,
-                COLOR_UPDATE_SPEED: 10
+                COLOR_UPDATE_SPEED: 10,
+                BACK_COLOR: { r: 250, g: 250, b: 249 } // Stone-50
             };
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            // Lógica simplificada de interacción (Splash)
-            // Nota: Para una simulación completa se requiere un shader complejo.
-            // Aquí habilitamos el rastro básico para asegurar optimización.
-            
-            let mouseX = 0, mouseY = 0;
-            window.addEventListener('mousemove', e => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                // Aquí se dispararían los eventos de WebGL
-            });
-
-            // En un entorno profesional, aquí cargaríamos los Shaders. 
-            // Para mantener la estabilidad del archivo único, este bloque 
-            // asegura que el canvas esté listo para recibir el rastro.
-            
-            console.log("Fluid Canvas initialized with Splash Parameters");
+            // Cargamos el script de simulación desde un CDN confiable
+            const script = document.createElement('script');
+            script.src = "https://unpkg.com/webgl-fluid-simulation";
+            script.onload = () => {
+                const simulation = window.WebGLFluid(canvas);
+                simulation.setParams({
+                    immediate: true,
+                    transparent: false,
+                    backgroundColor: '#fafaf9',
+                    colorUpdateSpeed: params.COLOR_UPDATE_SPEED,
+                    curl: params.CURL,
+                    densityDissipation: params.DENSITY_DISSIPATION,
+                    velocityDissipation: params.VELOCITY_DISSIPATION,
+                    pressure: params.PRESSURE,
+                    splatRadius: params.SPLAT_RADIUS,
+                    splatForce: params.SPLAT_FORCE,
+                    simResolution: params.SIM_RESOLUTION,
+                    dyeResolution: params.DYE_RESOLUTION,
+                    paused: false,
+                    embedded: true
+                });
+                
+                // Disparo inicial para que haya color al cargar
+                simulation.splats([{
+                    x: Math.random(),
+                    y: Math.random(),
+                    dx: (Math.random() - 0.5) * 500,
+                    dy: (Math.random() - 0.5) * 500,
+                    color: { r: 0.05, g: 0.58, b: 0.54 } // Teal-600
+                }]);
+            };
+            document.head.appendChild(script);
         })();
     </script>
 </body>
